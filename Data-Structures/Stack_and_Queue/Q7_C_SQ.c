@@ -102,9 +102,42 @@ int main()
 }
 
 ////////////////////////////////////////////////////////////
-int balanced(char *expression)
-{
+int balanced(char *expression){
 /* add your code here */
+	LinkedList ll = {0, NULL};
+	Stack comp = {ll};
+	for(int i = 0; expression[i] != '\0'; i++){
+		switch (expression[i])
+		{
+		case '[':
+			push(&comp, 3);
+			break;
+		case '{':
+			push(&comp, 2);
+			break;
+		case '(':
+			push(&comp, 1);
+			break;
+		case ']':
+			if(comp.ll.size == 0 || pop(&comp) != 3){
+				return 1;
+			}
+			break;
+		case '}':
+			if(comp.ll.size == 0 || pop(&comp) != 2){
+				return 1;
+			}
+			break;
+		case ')':
+			if(comp.ll.size == 0|| pop(&comp) != 1){
+				return 1;
+			}
+			break;
+		}
+		
+	}
+	if(comp.ll.size == 0) return 0;
+	return 1;
 }
 
 ////////////////////////////////////////////////////////////
