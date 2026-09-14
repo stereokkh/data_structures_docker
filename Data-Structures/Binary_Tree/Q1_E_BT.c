@@ -116,7 +116,16 @@ int main()
 int identical(BTNode *tree1, BTNode *tree2)
 
 {
+    if(tree1 == NULL && tree2 == NULL) return 1;
+    if(tree1 == NULL || tree2 == NULL) return 0;
+    if(tree1->item != tree2->item) return 0;
    /* add your code here */
+    int a = identical(tree1->left, tree2->left);
+    int b = identical(tree1->right, tree2->right);
+    if(a == 1 && b == 1) return 1;
+    else return 0;
+
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////

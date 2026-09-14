@@ -97,7 +97,37 @@ int main()
 int maxHeight(BTNode *node)
 
 {
+    if(node == NULL) return 0;
+
     /* add your code here */
+    Stack stack_temp1={NULL}, stak_temp2 = {NULL};
+    int height = -1;
+    bool flag = true;
+    push(&stack_temp1, node);
+    while (stack_temp1.top != NULL || stak_temp2.top != NULL)
+    {
+        if(flag == true){
+            while(stack_temp1.top != NULL){
+                BTNode* temp = pop(&stack_temp1);
+                if(temp->left != NULL) push(&stak_temp2, temp->left);
+                if(temp->right != NULL) push(&stak_temp2, temp->right);
+                           
+            }
+            height++;     
+            flag = false;
+        }else{
+            while (stak_temp2.top != NULL)
+            {                            
+                BTNode* temp = pop(&stak_temp2);
+                if(temp->left != NULL) push(&stack_temp1, temp->left);
+                if(temp->right != NULL) push(&stack_temp1, temp->right);
+                
+            }
+            height++;
+            flag = true;
+        }
+    }
+    return height;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

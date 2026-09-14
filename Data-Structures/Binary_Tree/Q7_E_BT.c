@@ -8,7 +8,7 @@ Purpose: Implementing the required functions for Question 7 */
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#define MAX_VAL 2147483647
 //////////////////////////////////////////////////////////////////////////////////
 
 typedef struct _btnode
@@ -103,6 +103,15 @@ int main()
 int smallestValue(BTNode *node)
 {
 	/* add your code here */
+    if(node == NULL) return MAX_VAL;
+    
+    int left = smallestValue(node->left);
+    int right = smallestValue(node->right);
+    int result = node->item;
+    if(left < result) result = left;
+    if(right < result) result = right;
+
+    return result;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
